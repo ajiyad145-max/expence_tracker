@@ -1,0 +1,25 @@
+#api call for create user
+###
+POST http://127.0.0.1:8000/user/register/
+Content-Type: application/json
+
+{
+    "username":"django",
+    "email":"django123@gmail.com",
+    "password":"password@123",
+    "phone":"9789878673",
+    "dob":"2005-11-11"
+}
+
+
+#api call for listing expense
+###
+GET http://127.0.0.1:8000/expense/
+Accept: application/json
+Authorization: Basic django:password@123
+
+#api call for adding expense
+###
+POST http://127.0.0.1:8000/expense/
+Content-Type: : application/json
+Authorization: Basic django:password@123
