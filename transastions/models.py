@@ -33,7 +33,7 @@ class Expense(models.Model):
 
     PAYMENT_CHOICES=(
         ("upi","upi"),
-        ("cash","cash")
+        ("cash","cash"),
     )
 
     payment_method = models.CharField(choices=PAYMENT_CHOICES,default="upi",max_length=200)

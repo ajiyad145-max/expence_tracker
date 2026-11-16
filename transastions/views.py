@@ -22,7 +22,7 @@ class ExpenseListCreateView(APIView):
         auth_user=request.user
         serializers_instance=ExpenseSerializer(data=form_data)
         if serializers_instance.is_valid():
-            serializers_instance.save(owner=auth_user)
+            serializers_instance.save(owner = auth_user)
             return Response(serializers_instance.data)
         else:
             return Response(serializers_instance.errors)

@@ -3,6 +3,6 @@ from transastions.models import Expense
 
 class ExpenseSerializer(serializers.ModelSerializer):
     class Meta:
-        model=Expense
-        feilds="__all__"
-        read_only_feilds=["id","owner","created_at"]
+        model = Expense
+        fields="__all__"
+        read_only_fields=["id","owner","created_at"]
