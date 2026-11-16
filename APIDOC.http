@@ -4,10 +4,10 @@ POST http://127.0.0.1:8000/user/register/
 Content-Type: application/json
 
 {
-    "username":"django",
-    "email":"django123@gmail.com",
-    "password":"password@123",
-    "phone":"9789878679",
+    "username":"Ahmad_jiyad",
+    "email":"Jiyad276@gmail.com",
+    "password":"Jiyad@123",
+    "phone":"9789878666",
     "dob":"2005-11-11"
 }
 
@@ -16,16 +16,20 @@ Content-Type: application/json
 ###
 GET http://127.0.0.1:8000/expense/
 Accept: application/json
-Authorization: Basic django1:password@123
+Authorization: Basic Ahmad_jiyad:Jiyad@123
 
 #api call for adding expense
 ###
 POST http://127.0.0.1:8000/expense/
 Content-Type: application/json
-Authorization: Basic django1:password@123
+Authorization: Basic Ahmad_jiyad:Jiyad@123
 
 {
-    "amount":870
+    "title":"train_ticket",
+    "category":"travel",
+    "amount":565,
+    "payment_method":"upi"
+    
 }
 
 
@@ -33,4 +37,11 @@ Authorization: Basic django1:password@123
 ###
 GET http://127.0.0.1:8000/expense/1/
 Accept: application/json
-Authorization: Basic django:password@123
+Authorization: Basic django1:password@123
+
+
+#api call for get summary
+###
+GET http://127.0.0.1:8000/expense/summary/
+Accept: application/json
+Authorization: Basic Ahmad_jiyad:Jiyad@123

@@ -21,9 +21,13 @@ from accounts.views import SignUpView
 from transastions.views import ExpenseListCreateView
 from transastions.views import ExpenseRetrieveUpdateDeleteView
 
+from transastions.views import ExpenseSummaryView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/register/',SignUpView.as_view()),
     path('expense/',ExpenseListCreateView.as_view()),
     path('expense/<int:pk>/', ExpenseRetrieveUpdateDeleteView.as_view()),
+    
+    path('expense/summary/', ExpenseSummaryView.as_view()),
 ]

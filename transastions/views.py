@@ -7,8 +7,12 @@ from rest_framework.response import Response
 
 from transastions.models import Expense
 from transastions.serializers import ExpenseSerializer
-
 from transastions.permissions import IsOwner
+
+from datetime import datetime
+
+from django.db.models import Sum
+
 
 class ExpenseListCreateView(APIView):
     authentication_classes=[authentication.BasicAuthentication]
@@ -67,3 +71,24 @@ class ExpenseRetrieveUpdateDeleteView(APIView):
         self.check_object_permissions(request,qs)
 
         return Response({"message":"Deleted"})
+
+
+class ExpenseSummaryView(APIView):
+    authentication_classes=[authentication.BasicAuthentication]
+    permission_classes=[permissions.IsAuthenticated]
+
+    def get(self,request):
+        auth_user_expenses=Expense.objects.filter(owner=request.user)
+
+        response_data={
+            "todays_total":0,
+            "monthly_total":0,
+        }
+
+        cur_date=datetime.today().date()
+
+        todays_total=auth_user_expenses.filter(created_at__date=cur_date).values("amount").aggregate(total=Sum("amount")).get("total")
+
+        response_data["todays_total"]=todays_total
+
+        return Response(response_data)
