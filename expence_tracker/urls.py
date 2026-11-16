@@ -19,9 +19,11 @@ from django.urls import path
 
 from accounts.views import SignUpView
 from transastions.views import ExpenseListCreateView
+from transastions.views import ExpenseRetrieveUpdateDeleteView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/register/',SignUpView.as_view()),
     path('expense/',ExpenseListCreateView.as_view()),
+    path('expense/<int:pk>/', ExpenseRetrieveUpdateDeleteView.as_view()),
 ]
