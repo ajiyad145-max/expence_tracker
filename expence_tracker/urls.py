@@ -23,6 +23,8 @@ from transastions.views import ExpenseRetrieveUpdateDeleteView
 
 from transastions.views import ExpenseSummaryView
 
+from rest_framework.authtoken.views import ObtainAuthToken
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/register/',SignUpView.as_view()),
@@ -30,4 +32,6 @@ urlpatterns = [
     path('expense/<int:pk>/', ExpenseRetrieveUpdateDeleteView.as_view()),
     
     path('expense/summary/', ExpenseSummaryView.as_view()),
+
+    path('token/',ObtainAuthToken.as_view()),
 ]

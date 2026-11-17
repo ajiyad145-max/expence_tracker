@@ -12,22 +12,33 @@ Content-Type: application/json
 }
 
 
+#token
+###
+POST http://127.0.0.1:8000/token/
+Content-Type: application/json
+
+{
+    "username":"Ahmad_jiyad",
+    "password":"Jiyad@123"
+}
+
+
 #api call for listing expense
 ###
 GET http://127.0.0.1:8000/expense/
 Accept: application/json
-Authorization: Basic Ahmad_jiyad:Jiyad@123
+Authorization: Token c971c6fad4c5c41fa92e29a3c6d6c8e4ed64f70f
 
 #api call for adding expense
 ###
 POST http://127.0.0.1:8000/expense/
 Content-Type: application/json
-Authorization: Basic Ahmad_jiyad:Jiyad@123
+Authorization: Token c971c6fad4c5c41fa92e29a3c6d6c8e4ed64f70f
 
 {
-    "title":"train_ticket",
-    "category":"travel",
-    "amount":565,
+    "title":"shopping",
+    "category":"shopping",
+    "amount":1400,
     "payment_method":"upi"
     
 }
@@ -37,11 +48,11 @@ Authorization: Basic Ahmad_jiyad:Jiyad@123
 ###
 GET http://127.0.0.1:8000/expense/1/
 Accept: application/json
-Authorization: Basic django1:password@123
+Authorization: Token c971c6fad4c5c41fa92e29a3c6d6c8e4ed64f70f
 
 
 #api call for get summary
 ###
 GET http://127.0.0.1:8000/expense/summary/
 Accept: application/json
-Authorization: Basic Ahmad_jiyad:Jiyad@123
+Authorization: Token c971c6fad4c5c41fa92e29a3c6d6c8e4ed64f70f

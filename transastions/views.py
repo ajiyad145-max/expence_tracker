@@ -5,6 +5,8 @@ from rest_framework.views import APIView
 from rest_framework import permissions,authentication
 from rest_framework.response import Response
 
+from rest_framework.authtoken.views import ObtainAuthToken
+
 from transastions.models import Expense
 from transastions.serializers import ExpenseSerializer
 from transastions.permissions import IsOwner
@@ -15,7 +17,8 @@ from django.db.models import Sum
 
 
 class ExpenseListCreateView(APIView):
-    authentication_classes=[authentication.BasicAuthentication]
+    # authentication_classes=[authentication.BasicAuthentication]
+    authentication_classes=[authentication.TokenAuthentication]
     permission_classes=[permissions.IsAuthenticated]
     def get(self,request):
         auth_user=request.user
@@ -34,7 +37,8 @@ class ExpenseListCreateView(APIView):
             return Response(serializers_instance.errors)
 
 class ExpenseRetrieveUpdateDeleteView(APIView):
-    authentication_classes=[authentication.BasicAuthentication]
+    # authentication_classes=[authentication.BasicAuthentication]
+    authentication_classes=[authentication.TokenAuthentication]
     # permission_classes=[permissions.IsAuthenticated]
 
     permission_classes=[IsOwner]
@@ -74,7 +78,8 @@ class ExpenseRetrieveUpdateDeleteView(APIView):
 
 
 class ExpenseSummaryView(APIView):
-    authentication_classes=[authentication.BasicAuthentication]
+    # authentication_classes=[authentication.BasicAuthentication]
+    authentication_classes=[authentication.TokenAuthentication]
     permission_classes=[permissions.IsAuthenticated]
 
     def get(self,request):
@@ -85,10 +90,27 @@ class ExpenseSummaryView(APIView):
             "monthly_total":0,
         }
 
+        #todays total======
+
         cur_date=datetime.today().date()
 
         todays_total=auth_user_expenses.filter(created_at__date=cur_date).values("amount").aggregate(total=Sum("amount")).get("total")
 
         response_data["todays_total"]=todays_total
 
+        #montly totals=======
+
+        cur_month=datetime.today().month
+        cur_year=datetime.today().year
+
+        monthly_total=auth_user_expenses.filter(created_at__month=cur_month,
+                                                created_at__year=cur_year).values("amount").aggregate(total=Sum("amount")).get("total")
+
+
+        response_data["monthly_total"]=monthly_total
+        
         return Response(response_data)
+
+
+
+
